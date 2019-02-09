@@ -7,17 +7,25 @@ import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
 	private Collection<Product> products;
-
-	public void addProduct(Product product) {
-		// TODO: implement
-	}
+	
 
 	public void addProduct(Product product, Integer quantity) {
-		// TODO: implement
+		for(int i=0; i<quantity; i++) {
+			products.add(product);
+		}
 	}
 
-	public BigDecimal getSubtotal() {
-		return null;
+	public void addProduct(Product product) {
+		this.addProduct(product, 1);
+	}
+	
+	
+	public BigDecimal getTotalNetPrice() {
+		BigDecimal subtotal = BigDecimal.ZERO;
+		for (Product product : this.products) {
+			subtotal.add(product.getPrice());
+		}
+		return subtotal;
 	}
 
 	public BigDecimal getTax() {
